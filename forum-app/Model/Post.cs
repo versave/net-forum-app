@@ -14,6 +14,8 @@ namespace forum_app.Model {
         [Required]
         public string Content { get; set; }
 
+        public DateTime Date { get; set; }
+
         public string AuthorId { get; set; }
         public string AuthorName { get; set; }
     }

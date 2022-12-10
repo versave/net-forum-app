@@ -13,36 +13,34 @@
     <h1>Login to see your todos!</h1>
 }
 
-@if (SignInManager.IsSignedIn(User)) {
-    <p>
-        <a asp-page="AddTodo">Create New Todo</a>
-    </p>
+<p>
+    <a asp-page="AddPost">Create New Post</a>
+</p>
 
-    @if (Model.TodoList.Count > 0) {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.TodoList) {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Content)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserEmail)
-                        </td>
-                        <td>
-                            <a asp-page="/EditTodo" asp-route-id="@item.Id">Edit</a> |
+@if (Model.PostList.Count > 0) {
+    <div class="posts">
+        <ul>
+            @foreach (var item in Model.PostList) {
+                <li>
+                    <div class="post">
+                        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
 
-                            <a asp-page="/DeleteTodo" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
+                        <p>@Html.DisplayFor(modelItem => item.Content)</p>
+
+                        <div class="meta">
+                            <p>
+                                <strong>Author: </strong>
+
+                                @Html.DisplayFor(modelItem => item.AuthorName)
+
+                                -
+
+                                <span>@Html.DisplayFor(modelItem => item.Date)</span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
 }

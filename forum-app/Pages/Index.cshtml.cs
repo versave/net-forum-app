@@ -9,18 +9,19 @@ using forum_app.Model;
 
 namespace forum_app.Controllers {
     public class IndexModel : PageModel {
-        private readonly TodoContext _context;
+        private readonly PostContext _context;
 
-        public IndexModel(TodoContext context) {
+        public IndexModel(PostContext context) {
             _context = context;
         }
 
-        public IList<TodoList> TodoList { get;set; }
+        public IList<Post> PostList { get;set; }
 
         public async Task OnGetAsync() {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            TodoList = await _context.todoList.Where(todo => todo.UserId == userId).ToListAsync();
+            // TodoList = await _context.todoList.Where(todo => todo.UserId == userId).ToListAsync();
+            PostList = await _context.Post.ToListAsync();
         }
     }
 }

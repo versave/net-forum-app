@@ -1,0 +1,40 @@
+﻿.posts ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: -30px -15px 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+.posts li {
+    flex: 0 1 50%;
+    padding: 30px 15px 0;
+    box-sizing: border-box;
+}
+
+.post {
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 0 17px -9px #000;
+    box-sizing: border-box;
+}
+
+.post > p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post .meta {
+    margin: 0 -15px -15px;
+    padding: 15px;
+    background: #bababa;
+}
+
+.post .meta p {
+    margin-bottom: 0;
+}
