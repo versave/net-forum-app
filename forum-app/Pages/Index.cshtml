@@ -22,7 +22,7 @@
         <ul>
             @foreach (var item in Model.PostList) {
                 <li>
-                    <div class="post">
+                    <a asp-page="/ViewPost" asp-route-id="@item.Id" class="post">
                         <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
 
                         <p>@Html.DisplayFor(modelItem => item.Content)</p>
@@ -38,7 +38,7 @@
                                 <span>@Html.DisplayFor(modelItem => item.Date)</span>
                             </p>
                         </div>
-                    </div>
+                    </a>
                 </li>
             }
         </ul>

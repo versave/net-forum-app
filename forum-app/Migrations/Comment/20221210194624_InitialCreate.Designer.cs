@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using forum_app.Infrastructure;
 
-namespace forum_app.Migrations.Post
+namespace forum_app.Migrations.Comment
 {
-    [DbContext(typeof(PostContext))]
-    [Migration("20221210111359_InitialCreate")]
+    [DbContext(typeof(CommentContext))]
+    [Migration("20221210194624_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace forum_app.Migrations.Post
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("forum_app.Model.Post", b =>
+            modelBuilder.Entity("forum_app.Model.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,13 +41,12 @@ namespace forum_app.Migrations.Post
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Post");
+                    b.ToTable("Comment");
                 });
 #pragma warning restore 612, 618
         }

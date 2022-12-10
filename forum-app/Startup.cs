@@ -32,6 +32,7 @@ namespace forum_app
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
             services.AddDbContext<TodoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthConnectionString")));
             services.AddDbContext<PostContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthConnectionString")));
+            services.AddDbContext<CommentContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthConnectionString")));
 
             services.ConfigureApplicationCookie(config => {
                 config.LoginPath = "/Login";

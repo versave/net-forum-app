@@ -15,10 +15,19 @@
 }
 
 .post {
+    display: block;
     padding: 15px;
     background: #fff;
+    color: #000;
     box-shadow: 0 0 17px -9px #000;
     box-sizing: border-box;
+    text-decoration: none;
+    transition: transform .3s;
+}
+
+.post:hover {
+    transform: scale(1.02);
+    color: #000;
 }
 
 .post > p {
