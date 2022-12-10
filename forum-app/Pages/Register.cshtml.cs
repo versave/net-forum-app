@@ -23,7 +23,7 @@ namespace forum_app.Pages {
         public async Task<IActionResult> OnPostAsync() {
             if (ModelState.IsValid) {
                 var user = new IdentityUser() {
-                    UserName = Model.Email,
+                    UserName = Model.UserName,
                     Email = Model.Email,
                 };
 
