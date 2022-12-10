@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace forum_app.Pages {
-    [Authorize]
+    
     public class AddPostModel : PageModel {
         private readonly PostContext _context;
 
