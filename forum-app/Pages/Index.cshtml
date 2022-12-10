@@ -4,13 +4,7 @@
 @inject SignInManager<IdentityUser> SignInManager;
 
 @{
-    ViewData["Title"] = "Index";
-}
-
-@if (SignInManager.IsSignedIn(User)) {
-    <h1>My todos</h1>
-} else {
-    <h1>Login to see your todos!</h1>
+    ViewData["Title"] = "Forum App";
 }
 
 <p>
