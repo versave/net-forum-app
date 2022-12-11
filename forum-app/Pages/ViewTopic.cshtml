@@ -1,0 +1,36 @@
+﻿@page
+@model forum_app.Pages.ViewTopicModel
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> SignInManager;
+@{
+}
+
+@if (SignInManager.IsSignedIn(User)) {
+    <p>
+        <a asp-page="AddPost" asp-route-id="@Model.topicId">Create New Post</a>
+    </p>
+}
+
+@if (Model.PostList.Count > 0) {
+    <div class="posts">
+            @foreach (var item in Model.PostList) {
+                <a asp-page="/ViewPost" asp-route-id="@item.Id" class="post">
+                    <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+
+                    <p>@Html.DisplayFor(modelItem => item.Content)</p>
+
+                    <div class="meta">
+                        <p>
+                            <strong>Author: </strong>
+
+                            @Html.DisplayFor(modelItem => item.AuthorName)
+
+                            -
+
+                            <span>@Html.DisplayFor(modelItem => item.Date)</span>
+                        </p>
+                    </div>
+                </a>
+            }
+    </div>
+}

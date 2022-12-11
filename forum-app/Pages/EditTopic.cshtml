@@ -1,0 +1,36 @@
+﻿@page
+@model forum_app.Pages.EditTopicModel
+@{
+    ViewData["Title"] = "Edit Topic";
+}
+
+<h1>Edit Topic</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="TopicItem.Id" />
+            <input type="hidden" asp-for="TopicItem.AuthorId" />
+            <input type="hidden" asp-for="TopicItem.AuthorName" />
+            <input type="hidden" asp-for="TopicItem.Date" />
+
+            <div class="form-group">
+                <label asp-for="TopicItem.Title" class="control-label mb-2"></label>
+
+                <input asp-for="TopicItem.Title" class="form-control" />
+
+                <span asp-validation-for="TopicItem.Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-page="Index">Back to Forum</a>
+</div>

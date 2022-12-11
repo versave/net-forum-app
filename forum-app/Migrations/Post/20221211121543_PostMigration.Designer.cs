@@ -10,7 +10,7 @@ using forum_app.Infrastructure;
 namespace forum_app.Migrations.Post
 {
     [DbContext(typeof(PostContext))]
-    [Migration("20221211094734_PostMigration")]
+    [Migration("20221211121543_PostMigration")]
     partial class PostMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,9 @@ namespace forum_app.Migrations.Post
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

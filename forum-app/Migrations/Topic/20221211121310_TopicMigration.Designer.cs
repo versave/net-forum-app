@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using forum_app.Infrastructure;
 
-namespace forum_app.Migrations.Post
+namespace forum_app.Migrations.Topic
 {
-    [DbContext(typeof(PostContext))]
-    partial class PostContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TopicContext))]
+    [Migration("20221211121310_TopicMigration")]
+    partial class TopicMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace forum_app.Migrations.Post
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("forum_app.Model.Post", b =>
+            modelBuilder.Entity("forum_app.Model.Topic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,10 +34,6 @@ namespace forum_app.Migrations.Post
                     b.Property<string>("AuthorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -43,12 +41,9 @@ namespace forum_app.Migrations.Post
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TopicId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Post");
+                    b.ToTable("Topic");
                 });
 #pragma warning restore 612, 618
         }

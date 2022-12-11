@@ -5,49 +5,50 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using forum_app.Infrastructure;
 using forum_app.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace forum_app.Pages {
-    public class DeletePostModel : PageModel {
-        private readonly PostContext _context;
+    [Authorize]
+    public class EditTopicModel : PageModel {
+        private readonly TopicContext _context;
 
-        public DeletePostModel(PostContext context) {
+        public EditTopicModel(TopicContext context) {
             _context = context;
         }
 
         [BindProperty]
-        public Post PostItem { get; set; }
+        public Topic TopicItem { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id) {
             if (id == null) {
                 return NotFound();
             }
 
-            PostItem = await _context.Post.FirstOrDefaultAsync(m => m.Id == id);
-
+            TopicItem = await _context.Topic.FirstOrDefaultAsync(m => m.Id == id);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            bool isNotUserEditable = PostItem.AuthorId != userId && !User.IsInRole("Admin");
+            bool isNotUserEditable = TopicItem.AuthorId != userId && !User.IsInRole("Admin");
 
-
-            if (PostItem == null || isNotUserEditable) {
+            if (TopicItem == null || isNotUserEditable) {
                 return NotFound();
             }
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id) {
-            if (id == null) {
-                return NotFound();
+        public async Task<IActionResult> OnPostAsync() {
+            if (!ModelState.IsValid) {
+                return Page();
             }
 
-            PostItem = await _context.Post.FindAsync(id);
+            _context.Attach(TopicItem).State = EntityState.Modified;
 
-            if (PostItem != null) {
-                _context.Post.Remove(PostItem);
+            try {
                 await _context.SaveChangesAsync();
+            } catch (DbUpdateConcurrencyException) {
+                return NotFound();
             }
 
             return RedirectToPage("Index");

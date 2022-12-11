@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace forum_app.Pages {
-    
-    public class AddPostModel : PageModel {
-        private readonly PostContext _context;
+    [Authorize]
+    public class AddTopicModel : PageModel {
+        private readonly TopicContext _context;
 
-        public AddPostModel(PostContext context) {
+        public AddTopicModel(TopicContext context) {
             _context = context;
         }
 
@@ -23,30 +23,25 @@ namespace forum_app.Pages {
         }
 
         [BindProperty]
-        public Post PostItem { get; set; }
+        public Topic TopicItem { get; set; }
 
-        public async Task<IActionResult> OnPostAsync(int id) {
+        public async Task<IActionResult> OnPostAsync() {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var userName = User.FindFirstValue(ClaimTypes.Name);
             DateTime today = DateTime.Now;
 
-            if (id.Equals(null)) {
-                return NotFound();
-            }
-
-            PostItem.AuthorId = userId;
-            PostItem.AuthorName = userName;
-            PostItem.Date = today;
-            PostItem.TopicId = id;
+            TopicItem.AuthorId = userId;
+            TopicItem.AuthorName = userName;
+            TopicItem.Date = today;
 
             if (!ModelState.IsValid) {
                 return Page();
             }
 
-            _context.Post.Add(PostItem);
+            _context.Topic.Add(TopicItem);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("ViewTopic", new { id = PostItem.TopicId });
+            return RedirectToPage("Index");
         }
     }
 }

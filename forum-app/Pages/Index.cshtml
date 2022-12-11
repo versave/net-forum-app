@@ -7,21 +7,23 @@
     ViewData["Title"] = "Forum App";
 }
 
-<p>
-    <a asp-page="AddPost">Create New Post</a>
-</p>
+@if (SignInManager.IsSignedIn(User)) {
+    <p>
+        <a asp-page="AddTopic">Create New Topic</a>
+    </p>
+}
 
-@if (Model.PostList.Count > 0) {
+@if (Model.TopicList.Count > 0) {
     <div class="posts">
         <ul>
-            @foreach (var item in Model.PostList) {
+            @foreach (var item in Model.TopicList) {
                 <li>
-                    <a asp-page="/ViewPost" asp-route-id="@item.Id" class="post">
-                        <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                    <div class="card">
+                        <a asp-page="/ViewTopic" asp-route-id="@item.Id" class="card-header d-block text-decoration-none">
+                            <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                        </a>
 
-                        <p>@Html.DisplayFor(modelItem => item.Content)</p>
-
-                        <div class="meta">
+                        <div class="card-body">
                             <p>
                                 <strong>Author: </strong>
 
@@ -32,7 +34,15 @@
                                 <span>@Html.DisplayFor(modelItem => item.Date)</span>
                             </p>
                         </div>
-                    </a>
+
+                        @if (SignInManager.IsSignedIn(User) && @Model.userId == item.AuthorId || User.IsInRole("Admin")) {
+                            <div class="card-footer">
+                                <a asp-page="/EditTopic" asp-route-id="@item.Id" class="btn btn-success">Edit topic</a>
+
+                                <a asp-page="/DeleteTopic" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        }
+                    </div>
                 </li>
             }
         </ul>
