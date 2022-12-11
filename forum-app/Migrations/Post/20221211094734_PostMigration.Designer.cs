@@ -10,8 +10,8 @@ using forum_app.Infrastructure;
 namespace forum_app.Migrations.Post
 {
     [DbContext(typeof(PostContext))]
-    [Migration("20221210124945_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221211094734_PostMigration")]
+    partial class PostMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

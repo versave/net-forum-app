@@ -10,8 +10,8 @@ using forum_app.Model;
 namespace forum_app.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20220522090317_AddAuthentication")]
-    partial class AddAuthentication
+    [Migration("20221211094644_AuthMigration")]
+    partial class AuthMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

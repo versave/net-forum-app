@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace forum_app.Migrations
 {
-    public partial class AddAuthentication : Migration
+    public partial class AuthMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

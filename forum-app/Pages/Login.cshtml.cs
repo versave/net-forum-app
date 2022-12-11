@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using forum_app.ViewModel;
+using System.Security.Claims;
 
 namespace forum_app.Pages {
     public class LoginModel : PageModel {
@@ -20,9 +21,10 @@ namespace forum_app.Pages {
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null) {
             if (ModelState.IsValid) {
-                var identityResult = await signInManager.PasswordSignInAsync(Model.Email, Model.Password, Model.RememberMe, false);
-
+                var identityResult = await signInManager.PasswordSignInAsync(Model.UserName, Model.Password, Model.RememberMe, false);
+                
                 if (identityResult.Succeeded) {
+                
                     return returnUrl == null || returnUrl == "/" ? RedirectToPage("Index") : RedirectToPage(returnUrl);
                 }
             }

@@ -29,8 +29,9 @@ namespace forum_app.Pages {
 
             PostItem = await _context.Post.FirstOrDefaultAsync(m => m.Id == id);
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            bool isNotUserEditable = PostItem.AuthorId != userId && !User.IsInRole("Admin");
 
-            if (PostItem == null || PostItem.AuthorId != userId) {
+            if (PostItem == null || isNotUserEditable) {
                 return NotFound();
             }
 

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace forum_app.ViewModel {
     public class Login {
         [Required]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        [DataType(DataType.Text)]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

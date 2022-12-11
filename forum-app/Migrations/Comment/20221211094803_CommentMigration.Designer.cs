@@ -10,8 +10,8 @@ using forum_app.Infrastructure;
 namespace forum_app.Migrations.Comment
 {
     [DbContext(typeof(CommentContext))]
-    [Migration("20221210194624_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221211094803_CommentMigration")]
+    partial class CommentMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

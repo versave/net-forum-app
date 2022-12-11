@@ -30,7 +30,9 @@ namespace forum_app.Pages {
                 var result = await userManager.CreateAsync(user, Model.Password);
 
                 if (result.Succeeded) {
+                    userManager.AddToRoleAsync(user, "User").Wait();
                     await signInManager.SignInAsync(user, false);
+
                     return RedirectToPage("Index");
                 }
 

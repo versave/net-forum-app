@@ -33,10 +33,14 @@ namespace forum_app.Pages {
             return await this.SetPostInfo(id);
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id) {
+        public async Task<IActionResult>? OnPostAsync(int? id) {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var userName = User.FindFirstValue(ClaimTypes.Name);
             DateTime today = DateTime.Now;
+
+            if (AddComment.Content == null) {
+                return await this.SetPostInfo(id);
+            }
 
             AddComment.AuthorId = userId;
             AddComment.AuthorName = userName;
@@ -58,7 +62,7 @@ namespace forum_app.Pages {
 
             PostItem = await _postContext.Post.FirstOrDefaultAsync(m => m.Id == id);
             CommentList = await _commentContext.Comment.Where(comment => comment.PostId == PostItem.Id).ToListAsync();
-            this.isUserPost = PostItem.AuthorId == userId;
+            this.isUserPost = PostItem.AuthorId == userId || User.IsInRole("Admin");
 
             if (PostItem == null) {
                 return NotFound();
