@@ -62,7 +62,7 @@ namespace forum_app.Pages {
 
             PostItem = await _postContext.Post.FirstOrDefaultAsync(m => m.Id == id);
             CommentList = await _commentContext.Comment.Where(comment => comment.PostId == PostItem.Id).ToListAsync();
-            this.isUserPost = PostItem.AuthorId == userId || User.IsInRole("Admin");
+            this.isUserPost = PostItem.AuthorId == userId;
 
             if (PostItem == null) {
                 return NotFound();

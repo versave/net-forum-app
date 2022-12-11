@@ -26,7 +26,9 @@
 
             @if (SignInManager.IsSignedIn(User) && @Model.isUserPost) {
                 <a asp-page="/EditPost" asp-route-id="@Model.PostItem.Id" class="btn btn-success">Edit post</a>
+            }
 
+            @if (SignInManager.IsSignedIn(User) && @Model.isUserPost || User.IsInRole("Admin")) { 
                 <a asp-page="/DeletePost" asp-route-id="@Model.PostItem.Id" class="btn btn-danger">Delete</a>
             }
         </div>

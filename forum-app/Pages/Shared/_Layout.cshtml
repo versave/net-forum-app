@@ -18,10 +18,6 @@
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Forum App</a>
 
-                @if (User.IsInRole("Admin")) {
-                    <a class="nav-link" asp-page="/AdminActions">Add roles</a>
-                }
-
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
